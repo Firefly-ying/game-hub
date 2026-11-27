@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="theme-color" content="#f4f5fa" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#0c0e13" media="(prefers-color-scheme: dark)" />
+<meta name="description" content="小游戏聚合站前端框架占位（移动端优先），仅含页面结构与接入点，不含具体游戏实现。" />
+<title>GAME HUB · 前端框架占位</title>
+<link rel="stylesheet" href="css/tokens.css" />
+<link rel="stylesheet" href="css/base.css" />
+<link rel="stylesheet" href="css/layout.css" />
+<link rel="stylesheet" href="css/components.css" />
+</head>
+<body>
+<!-- 页面外壳：顶栏 + 视图容器 + 底部导航，全部由 js/core/router.js 驱动 -->
+<div class="app">
+  <header id="appbar" class="appbar" role="banner"></header>
+  <main id="view" class="view" role="main" tabindex="-1"></main>
+  <nav id="tabbar" class="tabbar" aria-label="主导航"></nav>
+</div>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<noscript><p class="noscript">该框架依赖 JavaScript 切换页面，请启用后重试。</p></noscript>
+
+<script src="js/data/catalog.js"></script>
+<script src="js/core/utils.js"></script>
+<script src="js/core/repository.js"></script>
+<script src="js/core/ui.js"></script>
+<script src="js/core/router.js"></script>
+<script src="js/views/home.js"></script>
+<script src="js/views/list.js"></script>
+<script src="js/views/search.js"></script>
+<script src="js/views/detail.js"></script>
+<script src="js/views/play.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

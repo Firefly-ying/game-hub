@@ -1,0 +1,93 @@
+/* ==========================================================================
+   tokens.css — 设计令牌
+   换品牌只需改这一层：颜色 / 圆角 / 间距 / 尺寸 / 动效
+   ========================================================================== */
+:root{
+  color-scheme: light;
+
+  /* 表面与文字 */
+  --bg:#f4f5fa;
+  --appbar-bg:rgba(244,245,250,.86);
+  --surface:#ffffff;
+  --surface-2:#eceef6;
+  --surface-3:#dde1ee;
+  --text:#14161d;
+  --text-dim:#5c6472;
+  --text-faint:#8b93a3;
+  --line:rgba(20,22,29,.09);
+  --line-strong:rgba(20,22,29,.20);
+
+  /* 品牌 */
+  --accent:#4f46e5;
+  --accent-2:#7c3aed;
+  --accent-soft:rgba(79,70,229,.10);
+  --accent-text:#4f46e5;
+  --warm:#ff7a45;
+  --ok:#0fa968;
+  --danger:#e5484d;
+
+  /* 骨架屏 */
+  --sk-base:#e7e9f2;
+  --sk-shine:#f7f8fc;
+
+  /* 阴影 */
+  --shadow-1:0 1px 2px rgba(16,18,28,.05), 0 6px 16px -10px rgba(16,18,28,.20);
+  --shadow-2:0 10px 28px -14px rgba(16,18,28,.34);
+
+  /* 圆角 */
+  --r-xs:8px;
+  --r-sm:12px;
+  --r-md:16px;
+  --r-lg:22px;
+  --r-pill:999px;
+
+  /* 间距与尺寸 */
+  --gap:12px;
+  --pad:16px;
+  --touch:44px;          /* 最小触控目标 */
+  --appbar-h:52px;
+  --tabbar-h:58px;
+  --content-max:720px;
+
+  /* 字体 */
+  --font:-apple-system,BlinkMacSystemFont,"HarmonyOS Sans SC","PingFang SC","Noto Sans SC","Source Han Sans SC","Microsoft YaHei",system-ui,sans-serif;
+
+  /* 动效 */
+  --dur:.24s;
+  --ease:cubic-bezier(.2,.8,.2,1);
+
+  /* 安全区（刘海 / 底部指示条 / 横屏圆角） */
+  --safe-top:env(safe-area-inset-top, 0px);
+  --safe-bottom:env(safe-area-inset-bottom, 0px);
+  --safe-left:env(safe-area-inset-left, 0px);
+  --safe-right:env(safe-area-inset-right, 0px);
+}
+
+/* 深色：跟随系统，也可用 <html data-theme="dark"> 手动指定 */
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme: dark;
+    --bg:#0c0e13;
+    --appbar-bg:rgba(12,14,19,.84);
+    --surface:#151922;
+    --surface-2:#1e232e;
+    --surface-3:#2b3241;
+    --text:#eef1f7;
+    --text-dim:#a4adbf;
+    --text-faint:#788396;
+    --line:rgba(255,255,255,.09);
+    --line-strong:rgba(255,255,255,.22);
+    --accent:#818cf8;
+    --accent-2:#a78bfa;
+    --accent-soft:rgba(129,140,248,.14);
+    --accent-text:#a5b4fc;
+    --sk-base:#1c212b;
+    --sk-shine:#262d3a;
+    --shadow-1:0 1px 2px rgba(0,0,0,.4), 0 6px 16px -10px rgba(0,0,0,.6);
+    --shadow-2:0 12px 30px -14px rgba(0,0,0,.85);
+  }
+}
+
+@media (min-width:900px){
+  :root{ --content-max:880px; }
+}

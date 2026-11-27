@@ -1,0 +1,152 @@
+/* ==========================================================================
+   layout.css — 应用外壳：顶栏 / 视图 / 底部导航 / 底部操作条 / 全屏容器
+   ========================================================================== */
+.app{
+  display:flex;
+  flex-direction:column;
+  min-height:100vh;
+  min-height:100dvh;
+}
+
+/* ---------- 顶栏：吸顶 + 毛玻璃，安全区从内边距延伸 ---------- */
+.appbar{
+  position:sticky;
+  top:0;
+  z-index:30;
+  background:var(--appbar-bg);
+  -webkit-backdrop-filter:saturate(1.5) blur(14px);
+  backdrop-filter:saturate(1.5) blur(14px);
+  border-bottom:1px solid transparent;
+  transition:border-color var(--dur) var(--ease);
+}
+.appbar.is-scrolled{border-bottom-color:var(--line)}
+
+.appbar__inner{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  max-width:var(--content-max);
+  margin:0 auto;
+  min-height:var(--appbar-h);
+  padding:calc(var(--safe-top) + 6px) calc(var(--safe-right) + var(--pad)) 6px calc(var(--safe-left) + var(--pad));
+}
+
+.appbar__title{
+  flex:1;
+  font-size:16px;
+  font-weight:650;
+  letter-spacing:.01em;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.appbar__sub{font-size:11px;color:var(--text-faint);font-variant-numeric:tabular-nums}
+
+/* 品牌占位 */
+.brand{display:flex;align-items:center;gap:8px;flex:0 0 auto;min-height:var(--touch)}
+.brand__mark{
+  width:28px;height:28px;border-radius:9px;
+  display:grid;place-items:center;
+  background:linear-gradient(135deg,var(--accent),var(--accent-2));
+  color:#fff;font-size:11px;font-weight:800;letter-spacing:.02em;
+  box-shadow:0 6px 14px -8px rgba(79,70,229,.9);
+}
+.brand__name{font-size:14px;font-weight:800;letter-spacing:.06em}
+
+/* 搜索入口占位（首页顶栏内） */
+.searchbar{
+  flex:1;display:flex;align-items:center;gap:8px;
+  min-height:var(--touch);
+  padding:0 14px;
+  border-radius:var(--r-pill);
+  background:var(--surface-2);
+  color:var(--text-faint);
+  font-size:13.5px;
+  white-space:nowrap;overflow:hidden;
+}
+.searchbar svg{width:17px;height:17px;flex:0 0 auto}
+.searchbar span{overflow:hidden;text-overflow:ellipsis}
+
+/* ---------- 视图容器 ---------- */
+.view{
+  flex:1 0 auto;
+  width:100%;
+  max-width:var(--content-max);
+  margin:0 auto;
+  padding:10px calc(var(--safe-right) + var(--pad)) calc(var(--tabbar-h) + var(--safe-bottom) + 24px) calc(var(--safe-left) + var(--pad));
+  /* 只用透明度过渡：带 transform 的入场动画会让 position:fixed 的子元素
+     （详情页 CTA 条）以本元素为包含块，导致定位错乱 */
+  animation:viewFade var(--dur) var(--ease) both;
+}
+@keyframes viewFade{from{opacity:0}to{opacity:1}}
+
+.view--detail{padding-bottom:calc(96px + var(--safe-bottom))}
+.view--full{
+  max-width:none;
+  padding:0;
+  display:flex;flex-direction:column;
+  height:100vh;height:100dvh;
+}
+
+/* ---------- 底部导航（fixed，始终可点） ---------- */
+.tabbar{
+  position:fixed;
+  left:0;right:0;bottom:0;
+  z-index:40;
+  background:var(--appbar-bg);
+  -webkit-backdrop-filter:saturate(1.5) blur(16px);
+  backdrop-filter:saturate(1.5) blur(16px);
+  border-top:1px solid var(--line);
+  padding-bottom:var(--safe-bottom);
+}
+.tabbar__inner{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  max-width:480px;
+  margin:0 auto;
+  height:var(--tabbar-h);
+  padding-left:var(--safe-left);
+  padding-right:var(--safe-right);
+}
+.tab{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+  min-height:var(--touch);
+  font-size:11px;letter-spacing:.02em;
+  color:var(--text-faint);
+  transition:color .18s var(--ease);
+}
+.tab svg{width:22px;height:22px}
+.tab:active{color:var(--text-dim)}
+.tab.is-active{color:var(--accent-text);font-weight:600}
+
+/* ---------- 底部操作条（详情页 CTA） ---------- */
+.actionbar{
+  position:fixed;
+  left:0;right:0;bottom:0;
+  z-index:35;
+  background:var(--appbar-bg);
+  -webkit-backdrop-filter:blur(16px);
+  backdrop-filter:blur(16px);
+  border-top:1px solid var(--line);
+  padding:10px calc(var(--safe-right) + var(--pad)) calc(10px + var(--safe-bottom)) calc(var(--safe-left) + var(--pad));
+  animation:viewFade .3s var(--ease) both;
+}
+.actionbar__inner{
+  display:flex;align-items:center;gap:10px;
+  max-width:var(--content-max);
+  margin:0 auto;
+}
+
+/* 沉浸模式：游戏运行时隐藏全局导航 */
+body.is-immersive .tabbar,
+body.is-immersive .appbar,
+body.is-immersive .actionbar{display:none}
+
+/* ---------- 横屏紧凑模式（假设：竖屏优先，不锁屏，横屏压缩留白） ---------- */
+@media (orientation:landscape) and (max-height:480px){
+  :root{--appbar-h:44px;--tabbar-h:50px}
+  .appbar__inner{padding-top:calc(var(--safe-top) + 2px);padding-bottom:2px}
+  .view{padding-top:6px}
+}
+
+@media (min-width:768px){
+  .tabbar__inner{max-width:420px}
+}
